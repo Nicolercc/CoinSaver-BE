@@ -1,0 +1,81 @@
+const transactions = [
+  {
+    id: 1122,
+    item_name: "income",
+    amount: 10000,
+    date: "10-23-2023",
+    from: "employer",
+  },
+  {
+    id: 1133,
+    item_name: "business_income",
+    amount: 12000,
+    date: "10-23-2023",
+    from: "business",
+  },
+  {
+    id: 1144,
+    item_name: "freelance_income",
+    amount: 15000,
+    date: "10-23-2023",
+    from: "freelance",
+  },
+  {
+    id: 1155,
+    item_name: "investment_income",
+    amount: 20000,
+    date: "10-24-2023",
+    from: "investments",
+  },
+  {
+    id: 1166,
+    item_name: "rental_income",
+    amount: 18000,
+    date: "10-25-2023",
+    from: "property",
+  },
+  {
+    id: 1177,
+    item_name: "side_job_income",
+    amount: 11000,
+    date: "10-26-2023",
+    from: "side_job",
+  },
+  {
+    id: 1188,
+    item_name: "bonus_income",
+    amount: 25000,
+    date: "10-27-2023",
+    from: "employer",
+  },
+  {
+    id: 1199,
+    item_name: "investment_income",
+    amount: 22000,
+    date: "10-28-2023",
+    from: "investments",
+  },
+  {
+    id: 1200,
+    item_name: "business_income",
+    amount: 28000,
+    date: "10-29-2023",
+    from: "business",
+  },
+  {
+    id: 1211,
+    item_name: "rental_income",
+    amount: 30000,
+    date: "10-30-2023",
+    from: "property",
+  },
+  {
+    id: 1222,
+    item_name: "income",
+    amount: 18000,
+    date: "10-31-2023",
+    from: "employer",
+  },
+];
+
+module.exports = transactions;
