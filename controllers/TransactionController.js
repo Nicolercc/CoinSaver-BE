@@ -28,18 +28,6 @@ router.get("/:id", (req, res, next) => {
 });
 
 //post (Create)
-// router.post("/", (req, res) => {
-//   const transactionBody = req.body;
-//   if (transactionBody) {
-//     transactionsArray.push(transactionBody);
-//     res.status(201).send(transactionBody);
-//   } else {
-//     res
-//       .status(404)
-//       .send({ message: "Transaction was not created! Try again." });
-//   }
-// });
-// what is the difference why is it not working?
 router.post("/", (req, res) => {
   const { item_name, amount, date, from } = req.body;
 
@@ -61,14 +49,50 @@ router.post("/", (req, res) => {
   }
 });
 
-//put update
-router.delete("/:index ", (req, res) => {
-  const { index } = req.params;
-  console.log("extracted index:", index);
-  const transaction = transactionsArray.find(
+//delete
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  let foundIndex = transactionsArray.findIndex((item) => item.id === id);
+
+  if (foundIndex === -1) {
+    res.status(404).json({ status: false, message: "Id not found" });
+  } else {
+    let foundTransaction = transactionsArray[foundIndex];
+    let newTransactionArray = transactionsArray.filter(
+      (item) => item.id !== id
+    );
+
+    transactionsArray = newTransactionArray;
+    res.json({
+      status: true,
+      message: "success",
+      data: foundTransaction,
+    });
+  }
+});
+
+//put
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const foundIndex = transactionsArray.findIndex(
     (item) => item.id === parseInt(id)
   );
-  const deletedTransaction = transactionsArray.splice(index, 1);
+
+  if (foundIndex === -1) {
+    res.status(404).json({ status: false, message: "ID does not exist" });
+  } else {
+    const updatedData = {
+      id: uuidv4(),
+      ...req.body,
+    };
+    transactionsArray.splice(foundIndex, 1, updatedData);
+    res.json({
+      message: "success",
+      status: true,
+      data: updatedData,
+    });
+  }
 });
 
 module.exports = router;
