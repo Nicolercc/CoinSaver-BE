@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const transactionsArray = require("../models/TransactionsData");
+const { v4: uuidv4 } = require("uuid");
 
 //get all (index)
 router.get("/", (req, res, next) => {
@@ -27,16 +28,47 @@ router.get("/:id", (req, res, next) => {
 });
 
 //post (Create)
+// router.post("/", (req, res) => {
+//   const transactionBody = req.body;
+//   if (transactionBody) {
+//     transactionsArray.push(transactionBody);
+//     res.status(201).send(transactionBody);
+//   } else {
+//     res
+//       .status(404)
+//       .send({ message: "Transaction was not created! Try again." });
+//   }
+// });
+// what is the difference why is it not working?
 router.post("/", (req, res) => {
-  const transactionBody = req.body;
-  if (transactionBody) {
-    transactionsArray.push(transactionBody);
-    res.status(201).send(transactionBody);
+  const { item_name, amount, date, from } = req.body;
+
+  if (!item_name || !amount || !date || !from) {
+    res.status(400).json({
+      status: false,
+      message: "You cannot create an empty transaction",
+    });
   } else {
-    res
-      .status(404)
-      .send({ message: "Transaction was not created! Try again." });
+    const newTransaction = {
+      id: uuidv4(),
+      item_name,
+      amount,
+      date,
+      from,
+    };
+    transactionsArray.push(newTransaction);
+    res.json({ status: true, data: newTransaction });
   }
+});
+
+//put update
+router.delete("/:index ", (req, res) => {
+  const { index } = req.params;
+  console.log("extracted index:", index);
+  const transaction = transactionsArray.find(
+    (item) => item.id === parseInt(id)
+  );
+  const deletedTransaction = transactionsArray.splice(index, 1);
 });
 
 module.exports = router;
