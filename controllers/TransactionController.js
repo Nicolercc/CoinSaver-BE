@@ -16,7 +16,7 @@ router.get("/", (req, res, next) => {
 //get one (show)
 router.get("/:id", (req, res, next) => {
   const { id } = req.params.id;
-  //find the id
+
   const transaction = transactionsArray.find(
     (item) => item.id === parseInt(id)
   );
