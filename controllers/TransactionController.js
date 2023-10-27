@@ -5,7 +5,6 @@ const { v4: uuidv4 } = require("uuid");
 
 //get all (index)
 router.get("/", (req, res, next) => {
-  //error handling technique
   if (transactionsArray && transactionsArray.length > 0) {
     res.status(200).send(transactionsArray);
   } else {
