@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
 
 //get one (show)
 router.get("/:id", (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
 
   const transaction = transactionsArray.find(
     (item) => item.id === parseInt(id)
@@ -52,14 +52,16 @@ router.post("/", (req, res) => {
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
 
-  let foundIndex = transactionsArray.findIndex((item) => item.id === id);
+  let foundIndex = transactionsArray.findIndex(
+    (item) => item.id === parseInt(id)
+  );
 
   if (foundIndex === -1) {
     res.status(404).json({ status: false, message: "Id not found" });
   } else {
     let foundTransaction = transactionsArray[foundIndex];
     let newTransactionArray = transactionsArray.filter(
-      (item) => item.id !== id
+      (item) => item.id !== parseInt(id)
     );
 
     transactionsArray = newTransactionArray;
