@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const transactionsArray = require("../models/TransactionsData");
+let transactionsArray = require("../models/TransactionsData");
 const { v4: uuidv4 } = require("uuid");
 
 //get all (index)
